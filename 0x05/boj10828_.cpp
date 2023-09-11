@@ -1,34 +1,43 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-    stack<int> s;
+const int MX = 10000;
+int dat[MX];
+int pos = 0;
+
+void push(int x)
+{
+    dat[pos++] = x;
+}
 
 int pop()
 {
-    int result = -1;
-    if(!s.empty())
-    {
-        result = s.top();
-        s.pop();
-    }
-    return result;
+    if (pos == 0)
+        return -1;
+    return dat[--pos];
 }
 
 int top()
 {
-    int result = -1;
-    if(!s.empty())
-    {
-        result = s.top();
-    }
-    return result;
+    if (pos == 0)
+        return -1;
+    return dat[pos - 1];
+}
+
+int size()
+{
+    return pos;
+}
+
+int empty()
+{
+    return !static_cast<bool>(pos);
 }
 
 int main(void)
 {
     ios::sync_with_stdio(0);
     cin.tie(0);
-
 
     int N, x;
     string input;
@@ -39,10 +48,10 @@ int main(void)
         if (input == "push")
         {
             cin >> x;
-            s.push(x);
+            push(x);
         }
         else if (input == "pop")
-        {        
+        {
             cout << pop() << '\n';
         }
         else if (input == "top")
@@ -51,11 +60,11 @@ int main(void)
         }
         else if (input == "size")
         {
-            cout << s.size() << '\n';
+            cout << size() << '\n';
         }
         else if (input == "empty")
         {
-            cout << s.empty() << '\n';
+            cout << empty() << '\n';
         }
     }
 }
